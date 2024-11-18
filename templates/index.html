@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Web Scraper</h1>
+        <form method="POST" action="/scrape">
+            <input type="text" name="url" placeholder="Masukkan URL" required style="width: 80%;">
+            <button type="submit">Scrape</button>
+        </form>
+        <hr>
+        {% if error %}
+            <p style="color: red;">Error: {{ error }}</p>
+        {% endif %}
+        {% if url %}
+            <h2>Data dari {{ url }}</h2>
+            <h3>Teks:</h3>
+            <ul>
+                {% for text in texts %}
+                    <li>{{ text }}</li>
+                {% endfor %}
+            </ul>
+            <h3>Gambar:</h3>
+            {% for img in images %}
+                <img src="{{ img }}" alt="Scraped Image">
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
